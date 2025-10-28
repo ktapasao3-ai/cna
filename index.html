@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Christian Nyl Aresgado - Personal Site</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+  <style>
+    :root {
+      --main-bg: #181818;
+      --card-bg: rgba(30, 30, 30, 0.93);
+      --accent: #ff9800;
+      --accent-light: #ffc34d;
+      --text-main: #f5f5f5;
+      --text-muted: #bdbdbd;
+      --shadow: 0 8px 32px #ff980033;
+      --border-radius: 18px;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: var(--main-bg);
+      color: var(--text-main);
+      font-family: 'Inter', Arial, sans-serif;
+      transition: background 0.4s;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after { box-sizing: inherit; }
+
+    .header {
+      background: linear-gradient(90deg, #181818 60%, #ff9800 100%);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 2rem;
+      border-bottom-left-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+      box-shadow: 0 2px 24px 0 #ff980044;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideDown 0.7s cubic-bezier(.32,.16,.56,.86);
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-60px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      background: #222;
+      box-shadow: 0 4px 16px #ff980066;
+      margin-right: 8px;
+      transition: border 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .logo-img:hover {
+      border: 3px solid var(--accent-light);
+      box-shadow: 0 8px 24px #ff980044;
+    }
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-btn {
+      background: none;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      color: var(--accent);
+      font-size: 1.1rem;
+      padding: 7px 22px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 0.7rem;
+      transition: 
+        background 0.18s,
+        color 0.18s,
+        border 0.18s,
+        box-shadow 0.2s,
+        transform 0.12s;
+    }
+    .nav-btn.active,
+    .nav-btn:hover {
+      background: var(--accent);
+      color: #181818;
+      border-color: var(--accent-light);
+      box-shadow: 0 3px 16px #ff980066;
+      transform: scale(1.05);
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2.8rem;
+      margin-bottom: 4.5rem;
+      min-height: 60vh;
+      width: 100%;
+    }
+    /* Home Page */
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      box-shadow: 0 4px 32px #ff980044;
+      margin-bottom: 1.5rem;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      background: #222;
+      animation: fadeIn 0.8s cubic-bezier(.32,.16,.56,.86);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .profile-heading {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 0.5rem 0;
+      color: var(--accent);
+      letter-spacing: 1px;
+      animation: fadeUp 0.7s 0.2s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .profile-subheading {
+      color: var(--accent-light);
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s 0.4s both;
+    }
+    .card {
+      background: var(--card-bg);
+      color: var(--text-main);
+      box-shadow: var(--shadow);
+      border-radius: var(--border-radius);
+      padding: 2.2rem 2rem;
+      margin-bottom: 3rem;
+      max-width: 520px;
+      border: 1.5px solid #232323;
+      backdrop-filter: blur(6px);
+      transition: transform 0.19s cubic-bezier(.32,.16,.56,.86), box-shadow 0.19s;
+      animation: fadeUp 0.8s 0.4s both;
+    }
+    .card:hover {
+      transform: translateY(-4px) scale(1.025);
+      box-shadow: 0 16px 44px #ff980066;
+      border-color: var(--accent);
+    }
+    .card strong {
+      color: var(--accent);
+    }
+    /* Gallery Page */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      animation: fadeUp 0.7s both;
+    }
+    .gallery-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 2px solid #232323;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+      position: relative;
+      animation: fadeUp 0.7s both;
+      min-width: 0;
+    }
+    .gallery-card:hover {
+      transform: translateY(-8px) scale(1.045);
+      box-shadow: 0 18px 48px #ff980077;
+      border-color: var(--accent);
+    }
+    .gallery-img,
+    .gallery-video {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: #222;
+      transition: filter 0.3s, transform 0.22s;
+      filter: grayscale(10%) brightness(0.92);
+      border-bottom: 2px solid #181818;
+      display: block;
+    }
+    .gallery-card:hover .gallery-img,
+    .gallery-card:hover .gallery-video {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.03);
+    }
+    .gallery-caption {
+      color: var(--accent-light);
+      padding: 1rem 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-align: left;
+      background: #232323;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+    }
+    .gallery-video {
+      background: #222;
+      border: none;
+      outline: none;
+      border-bottom: 2px solid #181818;
+      min-height: 120px;
+      max-height: 320px;
+      border-radius: 0;
+    }
+    .footer {
+      background: linear-gradient(90deg, #181818 60%, #ff9800 100%);
+      color: var(--accent-light);
+      text-align: center;
+      padding: 1.1rem 0;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      position: fixed;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      box-shadow: 0 -2px 24px #ff980033;
+      z-index: 99;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 1rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .header, .footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 1rem;
+      }
+      .main-content {
+        margin-top: 1.2rem;
+      }
+      .card {
+        padding: 1.2rem 0.8rem;
+        max-width: 98vw;
+      }
+      .profile-heading {
+        font-size: 2rem;
+      }
+      .gallery-grid {
+        gap: 0.7rem;
+        padding: 0 0.1rem;
+      }
+      .gallery-caption {
+        font-size: 1rem;
+        padding: 0.7rem 0.7rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-image {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <!-- Use an actual image instead of initials for the logo/avatar -->
+    
+    <nav class="nav">
+      <button class="nav-btn active" id="nav-home" onclick="switchPage('home')">Home</button>
+      <button class="nav-btn" id="nav-gallery" onclick="switchPage('gallery')">Gallery</button>
+    </nav>
+  </div>
+  <div class="main-content">
+    <!-- Home Section -->
+    <section id="section-home">
+      <img class="profile-image" src="cna3.jpeg" alt="Christian Nyl Aresgado" />
+      <div class="profile-heading">Christian Nyl Aresgado</div>
+      <div class="profile-subheading">Personal Autobiography</div>
+      <div class="card">
+        <p>Hello! My name is <strong>Christian Nyl Aresgado.</strong> Welcome to my personal website, where I share a little about myself and showcase a gallery of my favorite moments and memories.</p>
+        <p>
+          I am passionate about technology, learning new things, and capturing life's best moments through photos and videos. Explore my gallery to see more!
+        </p>
+      </div>
+    </section>
+    <!-- Gallery Section -->
+    <section id="section-gallery" style="display:none;">
+      <div class="gallery-grid">
+        <!-- IMAGES -->
+        <div class="gallery-card">
+          <img class="gallery-img" src="cna1.jpeg" alt="Mountain" />
+          
+        </div>
+        <div class="gallery-card">
+          <img class="gallery-img" src="cna2.jpeg" alt="Beach" />
+          
+        </div>
+        <div class="gallery-card">
+          <img class="gallery-img" src="cna4.jpeg" alt="City" />
+          
+        </div>
+        <div class="gallery-card">
+          <img class="gallery-img" src="cna5.jpeg" alt="City" />
+          
+        </div>
+        <!-- VIDEOS -->
+        <div class="gallery-card">
+          <video class="gallery-video" controls preload="none" poster="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=80">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-caption">Coding timelapse - 2024</div>
+        </div>
+        <div class="gallery-card">
+          <video class="gallery-video" controls preload="none" poster="https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=600&q=80">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          
+      </div>
+    </section>
+  </div>
+  <footer class="footer">
+    © 2025 Christian Nyl Aresgado
+  </footer>
+  <script>
+    // Simple navigation logic
+    function switchPage(page) {
+      const homeSection = document.getElementById('section-home');
+      const gallerySection = document.getElementById('section-gallery');
+      const btnHome = document.getElementById('nav-home');
+      const btnGallery = document.getElementById('nav-gallery');
+      if(page === 'home') {
+        homeSection.style.display = '';
+        gallerySection.style.display = 'none';
+        btnHome.classList.add('active');
+        btnGallery.classList.remove('active');
+        document.title = 'Christian Nyl Aresgado - Autobiography';
+      } else {
+        homeSection.style.display = 'none';
+        gallerySection.style.display = '';
+        btnHome.classList.remove('active');
+        btnGallery.classList.add('active');
+        document.title = 'Christian Nyl Aresgado - Gallery';
+      }
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    // Allow switching with hash (#home, #gallery)
+    function handleHash() {
+      if (window.location.hash === '#gallery') {
+        switchPage('gallery');
+      } else {
+        switchPage('home');
+      }
+    }
+    window.addEventListener('hashchange', handleHash);
+    // On load
+    handleHash();
+  </script>
+</body>
+</html>
